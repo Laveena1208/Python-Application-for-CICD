@@ -1,0 +1,26 @@
+version: 0.2
+env:
+    variables:
+        DOCKER_USERNAME: /Python-application-for-cicd/docker-credentials/docker-username
+        DOCKER_PASSWORD: /Python-application-for-cicd/docker-credentials/docker-password
+        DOCKER_REGISTRY_URL: /Python-application-for-cicd/docker-credentials/docker-registery-url
+    parameter-store:
+        DOCKER_USERNAME: /Python-application-for-cicd/docker-credentials/docker-username
+        DOCKER_PASSWORD: /Python-application-for-cicd/docker-credentials/docker-password
+        DOCKER_REGISTRY_URL: /Python-application-for-cicd/docker-credentials/docker-registery-url
+phases:
+    install:
+        runtime-versions:
+            python: 3.11
+    pre_build:
+        commands: 
+            - pip install -r requirements.txt
+    build:
+        commands: 
+            - echo "building docker image"
+            - docker build -t "$DOCKER_REGISTRY_URL/$DOCKER_USERNAME/python-application-for-cicd:latest" .
+            - docker push "$DOCKER_REGISTRY_URL/$DOCKER_USERNAME/python-application-for-cicd:latest"
+            
+    post_build:
+        commands: 
+            - echo "build is sucessful"
