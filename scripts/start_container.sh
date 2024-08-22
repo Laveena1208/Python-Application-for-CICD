@@ -2,7 +2,7 @@
 set -e
 
 # Pull the Docker image from Docker Hub
-docker pull simple-python-flask-app
+docker pull laveenak1208/simple-python-flask-app
 
 # Run the Docker image as a container
-docker run -d -p 5000:5000 simple-python-flask-app
+docker run -d -p 5000:5000 laveenak1208/simple-python-flask-app
